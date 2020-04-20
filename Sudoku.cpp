@@ -313,7 +313,6 @@ int main()
     }
 
     sudokuBoard = zeroFilling(sudokuBoard, getDifficulty(difficulty));
-    printBoard(sudokuBoard);
     play(sudokuBoard);
 
 };
