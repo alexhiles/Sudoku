@@ -11,6 +11,26 @@ enum class GameDifficulty
   HARD,
 };
 
+
+// Tell compiler these exist 
+void printBoard(std::vector<std::vector<int>> array);
+void printRow(std::vector<std::vector<int> > array, int row_number);
+void printCol(std::vector<std::vector<int> > array, int col_number);
+void printRules();
+std::vector<int> getRow(std::vector<std::vector<int> > array, int row_number);
+std::vector<int> getCol(std::vector<std::vector<int> > array, int col_number);
+std::vector<int> shiftLeft(std::vector<int> array);
+int getSum(std::vector<int> array);
+int play(std::vector<std::vector<int> > array);
+bool findInteger(std::vector<int> array, int findme);
+bool checkWin(std::vector<std::vector<int> > array);
+GameDifficulty getDifficulty(int d);
+std::vector<std::vector<int> > zeroFilling(std::vector<std::vector<int> > array, GameDifficulty Difficulty);
+std::vector<std::vector<int> > boardGen();
+
+
+
+
 void printBoard(std::vector<std::vector<int>> array)
 {
 std::cout << '\n';
@@ -43,7 +63,7 @@ void printRow(std::vector<std::vector<int> > array, int row_number)
     std::cout << array[row_number][i] << " ";
   }
   std::cout << '\n';
-}
+};
 
 void printCol(std::vector<std::vector<int> > array, int col_number)
 {
@@ -52,7 +72,7 @@ void printCol(std::vector<std::vector<int> > array, int col_number)
     std::cout << array[i][col_number] << " ";
   }
   std::cout << '\n';
-}
+};
 
 void printRules()
 {
@@ -86,6 +106,18 @@ std::vector<int> getCol(std::vector<std::vector<int> > array, int col_number)
   return col;
 };
 
+std::vector<int> shiftLeft(std::vector<int> array)
+{
+  for (int i = 0; i < array.size() - 1;i++)
+  {
+  int temp     = array[i + 1];
+  array[i + 1] = array[i];
+  array[i]     = temp;
+
+  };
+  return array;
+};
+
 int getSum(std::vector<int> array)
 {
   int sum{0};
@@ -96,34 +128,6 @@ int getSum(std::vector<int> array)
   }
 
   return sum;
-}
-
-bool findInteger(std::vector<int> array, int findme)
-{
-  for (int i = 0; i < 9; i++)
-  {
-    if (array[i] == findme)
-    {
-      return true;
-    }
-  };
-  return false;
-};
-
-bool checkWin(std::vector<std::vector<int> > array)
-{
-  for (int i = 0; i < 9; i++)
-  {
-    if (getSum(getRow(array, i)) != 45)
-    {
-      return false;
-    }
-    else if (getSum(getCol(array, i)) != 45)
-    {
-      return false;
-    }
-  };
-  return true;
 };
 
 int play(std::vector<std::vector<int> > array)
@@ -188,6 +192,35 @@ int play(std::vector<std::vector<int> > array)
 
 };
 
+bool findInteger(std::vector<int> array, int findme)
+{
+  for (int i = 0; i < 9; i++)
+  {
+    if (array[i] == findme)
+    {
+      return true;
+    }
+  };
+  return false;
+};
+
+bool checkWin(std::vector<std::vector<int> > array)
+{
+  for (int i = 0; i < 9; i++)
+  {
+    if (getSum(getRow(array, i)) != 45)
+    {
+      return false;
+    }
+    else if (getSum(getCol(array, i)) != 45)
+    {
+      return false;
+    }
+  };
+  return true;
+};
+
+
 GameDifficulty getDifficulty(int d)
 {
   GameDifficulty diff;
@@ -204,20 +237,7 @@ GameDifficulty getDifficulty(int d)
     diff = GameDifficulty::HARD;
   }
   return diff;
-}
-
-
-std::vector<int> shiftLeft(std::vector<int> array)
-{
-  for (int i = 0; i < array.size() - 1;i++)
-  {
-  int temp     = array[i + 1];
-  array[i + 1] = array[i];
-  array[i]     = temp;
-
-  };
-  return array;
-}
+};
 
 std::vector<std::vector<int> > zeroFilling(std::vector<std::vector<int> > array, GameDifficulty Difficulty)
 {
@@ -268,7 +288,6 @@ std::vector<std::vector<int> > zeroFilling(std::vector<std::vector<int> > array,
   return array;
 };
 
-
 std::vector<std::vector<int> > boardGen()
 {
 
@@ -293,7 +312,7 @@ std::vector<std::vector<int> > boardGen()
     Board.push_back(sudokuGen[permIndices[k]]);
   }
   return Board;
-}
+};
 
 int main()
 {
